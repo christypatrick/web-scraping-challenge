@@ -75,11 +75,16 @@ def scrape():
 
     # select the Mars Planet Profile table
     table_df = tables[0]
-    table_df
+    #table_df
+
+    # assign columns and set index of dataframe
+    table_df.columns = ['Description', 'Mars']
+    table_df.set_index('Description', inplace=True)
 
     #Use Pandas to convert the data to a HTML table string
-    html_table = table_df.to_html()
-    print(html_table)
+    #html_table = table_df.to_html()
+    #print(html_table)
+    html_table = table_df.to_html(classes="table table-striped")
 
     # Mars Hemispheres
 

@@ -1,0 +1,105 @@
+body {
+    background:silver;
+  }
+
+#navbar-toggler{
+    color: white;
+    background: steelblue;
+}
+
+.box {
+    border:2px solid grey;
+    
+    padding: 20px;
+    background: white;
+  }
+
+.box1 {
+    border:2px solid grey;
+    padding: 20px;
+    background: white;
+    height: 350px;
+}
+
+.container {
+
+    margin: 0 auto;
+    padding-top: 20px;
+  }
+
+h1{
+    font-size: 30px;
+    color: steelblue;
+    font-weight: bold;
+    font-family: Geneva;
+    text-align: left;
+}
+
+h2{
+    font-size: 24px;
+    color: steelblue;
+    font-weight: bold;
+    font-family: Geneva;
+    text-align: left;
+}
+
+h3{
+    font-size: 14px;
+    color: steelblue;
+    font-weight: bold;
+    font-family: Geneva;
+    text-align: left;
+}
+
+h4{
+    font-size: 20px;
+    color:steelblue;
+    font-weight: bold;
+    font-family: Geneva;
+    text-align: center;
+}
+
+#Fig1{
+    float: left;
+    width: 100px;
+    height: 100px;
+    margin-right: 10px;
+  }
+
+#vis-images1{
+    float: left;
+    width: 125px;
+    height: 125px;
+    margin-right: 10px;
+}
+
+#vis-images2{
+    float: left;
+    width: 125px;
+    height: 125px;
+    margin-right: 10px;
+}
+
+#vis-images3{
+    float: left;
+    width: 125px;
+    height: 125px;
+    margin-right: 10px;
+}
+
+#vis-images4{
+    float: left;
+    width: 125px;
+    height: 125px;
+    margin-right: 10px;
+}
+
+p.comparison_italics{
+    font-style: italic;
+}
+
+.img-responsive{
+    width: 100%;
+    border:none;
+}
+
