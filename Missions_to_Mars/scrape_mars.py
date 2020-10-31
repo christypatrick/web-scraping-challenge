@@ -3,25 +3,31 @@ from bs4 import BeautifulSoup as soup
 from splinter import Browser
 import pandas as pd
 import requests
+import time
 
 def init_browser():
     # Windows Users
     executable_path = {'executable_path': 'chromedriver.exe'}
     browser = Browser('chrome', **executable_path, headless=False)
+    return browser
 
 def scrape():
+    # Initiate headless driver for deployment
+    #browser = Browser("chrome", executable_path="chromedriver", headless=True)
     browser = init_browser()
-    
+         
     # NASA Mars News
     # URL to be scraped
     url = "https://mars.nasa.gov/news/"
     browser.visit(url)
 
+    time.sleep(1)
+
     # Convert the browser html to a soup object and then quit the browser
     html = browser.html
-    news_soup = soup(html, 'html.parser')
+    newssoup = soup(html, 'html.parser')
     
-    slide_elem = news_soup.select_one('ul.item_list li.slide')
+    slide_elem = newssoup.select_one('ul.item_list li.slide')
 
     # Use the parent element to find the first tag and save it as `news_title`
     news_title = slide_elem.find("div", class_='content_title').get_text()
@@ -33,8 +39,8 @@ def scrape():
 
     # JPL Mars Space Images - Featured Image
     # define URL to scrape and inform browser to visit the page 
-    url = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
-    browser.visit(url)
+    jpl_url = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
+    browser.visit(jpl_url)
 
     #Click full image
     browser.click_link_by_partial_text('FULL IMAGE')
@@ -42,28 +48,30 @@ def scrape():
     #click more info
     browser.click_link_by_partial_text('more info')
 
+    time.sleep(1)
+
     html= browser.html
-    soup = soup(html, 'html.parser')
+    jplsoup = soup(html, 'html.parser')
 
     # pull images from site
-    image_url = soup.find('img', class_='main_image').get('src')
+    image_url = jplsoup.find('img', class_='main_image').get('src')
 
-    print(images)
+    #print(images)
 
     # full image URL
     featured_image_url = 'https://www.jpl.nasa.gov' + image_url
-    print(featured_image_url)
+    #print(featured_image_url)
 
 
     # Mars Facts
 
     # define URL to scrape and inform browser to visit the page - do this for every url
-    url = 'https://space-facts.com/mars/'
-    browser.visit(url)
+    facts_url = 'https://space-facts.com/mars/'
+    browser.visit(facts_url)
 
     #scrape the table containing facts about the planet including Diameter, Mass, etc.
     #automatically scrape the tabular data from the page
-    tables = pd.read_html(url)
+    tables = pd.read_html(facts_url)
 
     # select the Mars Planet Profile table
     table_df = tables[0]
@@ -77,8 +85,8 @@ def scrape():
 
     # define URL to scrape and inform browser to visit the page - do this for every url
     # USGS Astrogeology site
-    url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
-    browser.visit(url)
+    hem_url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
+    browser.visit(hem_url)
 
     # Store prefix for URL
     url_prefix = 'https://astrogeology.usgs.gov'
@@ -90,10 +98,10 @@ def scrape():
 
     # Splinter can capture a page's underlying html and use pass it to BeautifulSoup to allow us to scrape the content
     html = browser.html
-    mars_soup = soup(html, 'html.parser')
+    marssoup = soup(html, 'html.parser')
 
     # Retreive all items that contain hemisphere info
-    hem_item = mars_soup.findAll('div', class_='item')
+    hem_item = marssoup.findAll('div', class_='item')
 
     # Empty list for hemisphere urls 
     hem_image_url = []
@@ -123,7 +131,7 @@ def scrape():
     hem_image_url    
 
 
-    dictionary = {
+    mars_dict = {
         "news_title": news_title,
         "news_p": news_p,
         "featured_image_url": featured_image_url,
@@ -135,5 +143,5 @@ def scrape():
     browser.quit()
 
     # Return results
-    return dictionary
+    return mars_dict
 
