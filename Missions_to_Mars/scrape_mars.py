@@ -56,13 +56,9 @@ def scrape():
     # pull images from site
     image_url = jplsoup.find('img', class_='main_image').get('src')
 
-    #print(images)
-
     # full image URL
     featured_image_url = 'https://www.jpl.nasa.gov' + image_url
-    #print(featured_image_url)
-
-
+    
     # Mars Facts
 
     # define URL to scrape and inform browser to visit the page - do this for every url
@@ -82,8 +78,6 @@ def scrape():
     table_df.set_index('Description', inplace=True)
 
     #Use Pandas to convert the data to a HTML table string
-    #html_table = table_df.to_html()
-    #print(html_table)
     html_table = table_df.to_html(classes="table table-striped")
 
     # Mars Hemispheres
@@ -134,7 +128,6 @@ def scrape():
         hem_image_url.append({"title" : title, "img_url" : img_url})
 
     hem_image_url    
-
 
     mars_dict = {
         "news_title": news_title,

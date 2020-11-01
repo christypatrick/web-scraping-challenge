@@ -40,14 +40,12 @@
     
           <div class="col-md-4">
             <h3>Mars Facts</h3>   
-              <div class="table">                            
+              <div class="table-responsive">                            
                 {{ mars.html_table | safe}} 
               </div>
           </div>  
         </div>
       </div>
-    
-    
 
     <div class="container">
       <div class="row">
@@ -60,16 +58,13 @@
       <div class="row">
         {% for hemisphere in mars.hem_image_url %}
         <div class="col-md-6">
-   
         <img src="{{ hemisphere.img_url }}" class="img-fluid img-thumbnail" alt="..."/>
         <p>{{ hemisphere.title }}</p>
         </div>
         {% endfor %}
       </div>
     </div>
-    
-    
-
+  
   </div>
   </div>
 </main>
